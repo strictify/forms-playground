@@ -1,0 +1,4 @@
+Problem parsing /mnt/Development/__strictify/forms_playground/psalm.xml:
+  Could not resolve config path to /mnt/Development/__strictify/forms_playground//src/Response
+Problem parsing /mnt/Development/__strictify/forms_playground/psalm.xml:
+  Could not resolve config path to /mnt/Development/__strictify/forms_playground//src/Annotation

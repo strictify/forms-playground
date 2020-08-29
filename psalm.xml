@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<psalm
+        useDocblockPropertyTypes="false"
+        resolveFromConfigFile="true"
+        addParamDefaultToDocblockType="false"
+        allowPhpStormGenerics="true"
+        findUnusedCode="false"
+        findUnusedVariablesAndParams="true"
+        reportMixedIssues="true"
+        usePhpStormMetaPath="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+
+    <stubs>
+        <file name="stubs/Security/Core/Authentication/Token/TokenInterface/Voter.php"/>
+        <file name="stubs/Security/Core/Authentication/Token/TokenInterface/VoterInterface.php"/>
+        <file name="stubs/Security/Core/Authentication/Token/TokenInterface/TokenInterface.php"/>
+        <!--        <file name="stubs/Doctrine/ORM/EntityRepository.php"/>-->
+    </stubs>
+
+    <projectFiles>
+        <directory name="src"/>
+        <file name="functions.php"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+            <file name="src/Kernel.php"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <Trace errorLevel="error" />
+        <UnusedClosureParam errorLevel="suppress"/>
+        <MixedReturnTypeCoercion errorLevel="suppress"/>
+        <UnusedClass>
+            <errorLevel type="suppress">
+<!--                <directory name="src/Command"/>-->
+<!--                <directory name="src/Cache"/>-->
+            </errorLevel>
+        </UnusedClass>
+
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+<!--                <directory name="src/Annotation"/>-->
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+
+        <UnusedMethod>
+            <errorLevel type="suppress">
+                <!--                <directory name="src/Controller"/>-->
+<!--                <directory name="src/EventSubscriber"/>-->
+                <referencedMethod name="*::__construct"/>
+            </errorLevel>
+        </UnusedMethod>
+
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="*::__construct"/>
+                <directory name="src/Struct"/>
+                <directory name="src/View"/>
+<!--                <directory name="src/Command"/>-->
+<!--                <directory name="src/Service"/>-->
+<!--                <directory name="src/EventSubscriber"/>-->
+<!--                <directory name="src/Twig"/>-->
+                <!-- Tests have lots of unused public - all the test methods-->
+                <directory name="tests/"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+
+        <UnusedMethodCall>
+            <errorLevel type="suppress">
+                <directory name="src/View"/>
+            </errorLevel>
+        </UnusedMethodCall>
+
+        <UnusedProperty>
+            <errorLevel type="suppress">
+                <directory name="src/View"/>
+            </errorLevel>
+        </UnusedProperty>
+
+        <UnusedClass>
+            <errorLevel type="suppress">
+<!--                <directory name="src/Twig"/>-->
+<!--                <directory name="src/Annotation"/>-->
+<!--                <directory name="src/ArgumentValueResolver"/>-->
+            </errorLevel>
+        </UnusedClass>
+
+        <UninitializedProperty>
+            <errorLevel type="suppress">
+<!--                <directory name="src/Response"/>-->
+            </errorLevel>
+        </UninitializedProperty>
+
+
+    </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
+            <containerXml>var/cache/dev/App_KernelDevDebugContainer.xml</containerXml>
+        </pluginClass>
+
+    </plugins>
+</psalm>

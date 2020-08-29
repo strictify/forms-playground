@@ -2,9 +2,10 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "almasaeed2010/adminlte": "~3.0",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.1",
@@ -50,8 +51,16 @@
         "symfony/stopwatch": "^5.1",
         "symfony/twig-bundle": "^5.1",
         "symfony/var-dumper": "^5.1",
-        "symfony/web-profiler-bundle": "^5.1"
+        "symfony/web-profiler-bundle": "^5.1",
+        "vimeo/psalm": "^3.14",
+        "psalm/plugin-symfony": "dev-symfony-forms"
     },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "https://github.com/strictify/psalm-plugin-symfony.git"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {
