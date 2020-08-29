@@ -1,0 +1,9 @@
+base:
+    resource: ../*Action.php
+    type: annotation
+    prefix: /
+
+children:
+    resource: '../*/_config/routes.yaml'
+    prefix: /some_prefix
+
