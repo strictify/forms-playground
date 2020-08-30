@@ -7,7 +7,6 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -21,9 +20,6 @@ class UserType extends AbstractType
         $builder->add('firstName', TextType::class, [
             'get_value'    => fn(User $user) => $user->getFirstName(),
             'update_value' => fn(string $firstName, User $user) => $user->updateFirstName($firstName),
-            'constraints' => [
-                new NotNull(['message' => 'You cannot leave this field empty.']),
-            ]
         ]);
 
         $builder->add('lastName', TextType::class, [

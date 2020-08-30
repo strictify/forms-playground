@@ -7216,12 +7216,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strictify/psalm-plugin-symfony.git",
-                "reference": "d29c4a896577ddd6adcec4ef33fedc13060699bb"
+                "reference": "e2b5af83be0b9d31ec3d7f7676423244c07fc651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strictify/psalm-plugin-symfony/zipball/d29c4a896577ddd6adcec4ef33fedc13060699bb",
-                "reference": "d29c4a896577ddd6adcec4ef33fedc13060699bb",
+                "url": "https://api.github.com/repos/strictify/psalm-plugin-symfony/zipball/e2b5af83be0b9d31ec3d7f7676423244c07fc651",
+                "reference": "e2b5af83be0b9d31ec3d7f7676423244c07fc651",
                 "shasum": ""
             },
             "require": {
@@ -7300,7 +7300,7 @@
             "support": {
                 "source": "https://github.com/strictify/psalm-plugin-symfony/tree/symfony-forms"
             },
-            "time": "2020-08-28T20:00:08+00:00"
+            "time": "2020-08-30T08:47:17+00:00"
         },
         {
             "name": "sebastian/diff",

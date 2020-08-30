@@ -25,6 +25,7 @@
         <file name="functions.php"/>
         <ignoreFiles>
             <directory name="vendor"/>
+            <directory name="src/Annotation"/>
             <file name="src/Kernel.php"/>
         </ignoreFiles>
     </projectFiles>

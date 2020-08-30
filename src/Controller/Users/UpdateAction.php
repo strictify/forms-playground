@@ -6,21 +6,25 @@ namespace App\Controller\Users;
 
 use App\Entity\User;
 use App\Form\UserType;
-use Symfony\Component\HttpFoundation\Request;
+use App\Annotation\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Form(class=UserType::class, data="user")
+ */
 class UpdateAction extends AbstractController
 {
     /**
      * @Route("/update/{id}", name="user_update", methods={"GET", "POST"})
+     *
+     * @param FormInterface<User> $form
      */
-    public function __invoke(Request $request, User $user): Response
+    public function __invoke(FormInterface $form, User $user): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid() && $form->getData()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 

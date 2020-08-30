@@ -4,21 +4,26 @@ declare(strict_types=1);
 
 namespace App\Controller\Users;
 
+use App\Entity\User;
 use App\Form\UserType;
-use Symfony\Component\HttpFoundation\Request;
+use App\Annotation\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Form(class=UserType::class)
+ */
 class CreateAction extends AbstractController
 {
     /**
      * @Route("/create", name="user_create", methods={"GET", "POST"})
+     * 
+     * @param FormInterface<User> $form
      */
-    public function __invoke(Request $request): Response
+    public function __invoke(FormInterface $form): Response
     {
-        $form = $this->createForm(UserType::class);
-        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid() && $user = $form->getData()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

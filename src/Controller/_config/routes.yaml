@@ -5,5 +5,3 @@ base:
 
 children:
     resource: '../*/_config/routes.yaml'
-    prefix: /some_prefix
-
