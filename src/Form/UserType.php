@@ -44,7 +44,7 @@ class UserType extends AbstractType
             'choice_label' => fn(Movie $movie) => $movie->getName(),
             'multiple'     => true,
             'get_value'    => function (User $user) {
-                $favMovies = $this->repository->findForUser($user);
+                $favMovies = $this->repository->matchBy($this->repository->whereUser($user));
 
                 return array_map_i($favMovies, fn(FavoriteMovie $favoriteMovie) => $favoriteMovie->getMovie());
             },

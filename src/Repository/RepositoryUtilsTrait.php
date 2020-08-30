@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\Expr\Expression;
 use Doctrine\Common\Collections\ExpressionBuilder;
 
 /**
+ * @template T of object
  * @method EntityManager getEntityManager()
  */
 trait RepositoryUtilsTrait
@@ -29,6 +30,9 @@ trait RepositoryUtilsTrait
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @psalm-param T $entity
+     */
     public function save(object $entity, bool $flush = true): void
     {
         $em = $this->getEntityManager();
@@ -36,8 +40,11 @@ trait RepositoryUtilsTrait
         if ($flush) {
             $em->flush();
         }
-
     }
+
+    /**
+     * @psalm-return array<T>
+     */
     public function matchBy(Expression ...$expressions): array
     {
         $criteria = $this->createCriteria(...$expressions);
@@ -45,6 +52,9 @@ trait RepositoryUtilsTrait
         return $this->matching($criteria)->toArray();
     }
 
+    /**
+     * @psalm-return T|null
+     */
     public function matchOneBy(Expression ...$expressions): ?object
     {
         $criteria = $this->createCriteria(...$expressions);

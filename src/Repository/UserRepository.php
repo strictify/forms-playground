@@ -16,6 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UserRepository extends ServiceEntityRepository
 {
+    /** @use RepositoryUtilsTrait<User> */
     use RepositoryUtilsTrait;
 
     public function __construct(ManagerRegistry $registry)

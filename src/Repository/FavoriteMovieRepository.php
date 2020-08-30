@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Entity\Movie;
 use App\Entity\FavoriteMovie;
+use Doctrine\Common\Collections\Expr\Expression;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class FavoriteMovieRepository extends ServiceEntityRepository
 {
+    /** @use RepositoryUtilsTrait<FavoriteMovie> */
     use RepositoryUtilsTrait;
 
     public function __construct(ManagerRegistry $registry)
@@ -38,14 +40,8 @@ class FavoriteMovieRepository extends ServiceEntityRepository
         return $favMovie;
     }
 
-    /**
-     * @return array<FavoriteMovie>
-     */
-    public function findForUser(User $user): array
+    public function whereUser(User $user): Expression
     {
-        return $this->createQueryBuilder('o')
-            ->where('o.user = :user')->setParameter('user', $user)
-            ->getQuery()->getResult();
+        return $this->expr()->eq('user', $user);
     }
-
 }
