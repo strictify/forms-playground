@@ -13,13 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
+ * @Route("/update/{id}", name="user_update", methods={"GET", "POST"})
+ *
  * @Form(class=UserType::class, data="user")
  */
 class UpdateAction extends AbstractController
 {
     /**
-     * @Route("/update/{id}", name="user_update", methods={"GET", "POST"})
-     *
      * @param FormInterface<User> $form
      */
     public function __invoke(FormInterface $form, User $user): Response
@@ -31,7 +31,7 @@ class UpdateAction extends AbstractController
             return $this->redirectToRoute('user_list');
         }
 
-        return $this->render('users/form.html.twig', [
+        return $this->render('forms/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }

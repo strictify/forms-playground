@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Users;
+namespace App\Controller\Movies;
 
-use App\Repository\UserRepository;
+use App\Repository\MovieRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/", name="user_list")
+ * @Route("/", name="movie_list", methods={"GET"})
  */
 class ListAction extends AbstractController
 {
-    private UserRepository $repository;
+    private MovieRepository $repository;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(MovieRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -25,8 +25,8 @@ class ListAction extends AbstractController
     {
         $users = $this->repository->findAll();
 
-        return $this->render('users/list.html.twig', [
-            'users' => $users,
+        return $this->render('movies/list.html.twig', [
+            'movies' => $users,
         ]);
     }
 }

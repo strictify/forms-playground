@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Users;
+namespace App\Controller\Movies;
 
-use App\Entity\User;
-use App\Form\UserType;
+use App\Entity\Movie;
+use App\Form\MovieType;
 use App\Annotation\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,23 +13,23 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/create", name="user_create", methods={"GET", "POST"})
+ * @Route("/create", name="movie_create", methods={"GET", "POST"})
  *
- * @Form(class=UserType::class)
+ * @Form(class=MovieType::class)
  */
 class CreateAction extends AbstractController
 {
     /**
-     * @param FormInterface<User> $form
+     * @param FormInterface<Movie> $form
      */
     public function __invoke(FormInterface $form): Response
     {
-        if ($form->isSubmitted() && $form->isValid() && $user = $form->getData()) {
+        if ($form->isSubmitted() && $form->isValid() && $data = $form->getData()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
+            $em->persist($data);
             $em->flush();
 
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('movie_list');
         }
 
         return $this->render('forms/form.html.twig', [

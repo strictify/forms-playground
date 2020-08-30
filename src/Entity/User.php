@@ -49,5 +49,5 @@ class User
     public function updateLastName(string $lastName): void
     {
         $this->lastName = $lastName;
-}
+    }
 }
