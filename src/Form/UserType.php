@@ -56,7 +56,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'factory' => fn(string $firstName, string $doLast) => new User($firstName, $doLast),
+            'factory' => fn(string $firstName, string $lastName) => new User($firstName, $lastName),
         ]);
     }
 }
