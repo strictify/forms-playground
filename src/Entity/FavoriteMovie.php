@@ -40,4 +40,9 @@ class FavoriteMovie
     {
         return $this->createdAt;
     }
+
+    public function getMovie(): Movie
+    {
+        return $this->movie;
+    }
 }

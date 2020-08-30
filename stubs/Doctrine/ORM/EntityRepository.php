@@ -19,23 +19,29 @@
 
 namespace Doctrine\ORM;
 
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Selectable;
-use Doctrine\Common\Inflector\Inflector;
-use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
+ *
+ * @template T
+
+ * @method find($id, $lockMode = null, ?int $lockVersion = null): ?T
+ * @method findOneBy(array $criteria, array $orderBy = null): T|null
+ * @method findAll(): array<T>
+ * @method findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array<T>
  */
 class EntityRepository implements ObjectRepository, Selectable
 {
     /**
      * @psalm-suppress LessSpecificImplementedReturnType
      */
-    public function find($id, $lockMode = null, $lockVersion = null)
-    {
-        return $this->_em->find($this->_entityName, $id, $lockMode, $lockVersion);
-    }
+    public function sfind($id, $lockMode = null, $lockVersion = null);
+
+    /**
+     * @psalm-suppress LessSpecificImplementedReturnType
+     */
+    public function sfindOneBy(array $criteria, array $orderBy = null);
 
 }

@@ -4,10 +4,8 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Fixed Header Table</h3>
-
                 <div class="card-tools">
-                        <a href="{{ path('user_create_simple') }}" class="btn btn-primary">Create</a>
+                    <a href="{{ path('user_create_simple') }}" class="btn btn-primary">Create</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -15,7 +13,6 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">First name</th>
                         <th scope="col">Last name</th>
                         <th scope="col">Actions</th>
@@ -24,7 +21,6 @@
                     <tbody>
                     {% for user in users %}
                         <tr>
-                            <th scope="row">1</th>
                             <td>{{ user.firstName }}</td>
                             <td>{{ user.lastName }}</td>
                             <td>

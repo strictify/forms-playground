@@ -22,6 +22,7 @@ class Movie
 
     public function __construct(string $name)
     {
+        $this->initId();
         $this->name = $name;
     }
 

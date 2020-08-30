@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
+use App\Entity\Movie;
 use App\Entity\FavoriteMovie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -14,37 +16,36 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class FavoriteMovieRepository extends ServiceEntityRepository
 {
+    use RepositoryUtilsTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, FavoriteMovie::class);
     }
 
-    // /**
-    //  * @return FavoriteMovie[] Returns an array of FavoriteMovie objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function removeFor(User $user, Movie $movie): void
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        if ($favMovie = $this->findOneBy(['user' => $user, 'movie' => $movie])) {
+            $this->getEntityManager()->remove($favMovie);
+        }
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?FavoriteMovie
+    public function createFor(User $user, Movie $movie): FavoriteMovie
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $favMovie = new FavoriteMovie($user, $movie);
+        $this->getEntityManager()->persist($favMovie);
+
+        return $favMovie;
     }
-    */
+
+    /**
+     * @return array<FavoriteMovie>
+     */
+    public function findForUser(User $user): array
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.user = :user')->setParameter('user', $user)
+            ->getQuery()->getResult();
+    }
+
 }

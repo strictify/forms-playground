@@ -4,8 +4,6 @@
     <div class="col-lg-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Fixed Header Table</h3>
-
                 <div class="card-tools">
                     <a href="{{ path('movie_create') }}" class="btn btn-primary">Create</a>
                 </div>
@@ -15,7 +13,6 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -23,7 +20,6 @@
                     <tbody>
                     {% for movie in movies %}
                         <tr>
-                            <th scope="row">1</th>
                             <td>{{ movie.name }}</td>
                             <td>
                                 <a href="{{ path('movie_update', {'id': movie.id}) }}">Update</a>

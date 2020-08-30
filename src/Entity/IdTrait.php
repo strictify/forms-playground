@@ -4,19 +4,29 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Id\UuidGenerator;
 
 trait IdTrait
 {
     /**
-     * @psalm-suppress PropertyNotSetInConstructor
+     * @var UuidInterface
+     *
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
-    private ?int $id;
+    protected UuidInterface $id;
 
-    public function getId(): ?int
+    private function initId(): void
+    {
+        $this->id = Uuid::uuid4();
+    }
+
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
