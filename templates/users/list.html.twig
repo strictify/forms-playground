@@ -7,7 +7,7 @@
                 <h3 class="card-title">Fixed Header Table</h3>
 
                 <div class="card-tools">
-                        <a href="{{ path('user_create') }}" class="btn btn-primary">Create</a>
+                        <a href="{{ path('user_create_simple') }}" class="btn btn-primary">Create</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -28,7 +28,7 @@
                             <td>{{ user.firstName }}</td>
                             <td>{{ user.lastName }}</td>
                             <td>
-                                <a href="{{ path('user_update', {'id': user.id}) }}">Update</a>
+                                <a href="{{ path('user_update_simple', {'id': user.id}) }}">Update</a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -26,7 +26,6 @@ class MovieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'show_factory_error' => false,
             'factory'            => fn(string $name) => new Movie($name),
         ]);
     }

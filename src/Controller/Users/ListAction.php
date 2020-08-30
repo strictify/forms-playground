@@ -9,9 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * @Route("/", name="user_list")
- */
 class ListAction extends AbstractController
 {
     private UserRepository $repository;
@@ -21,6 +18,9 @@ class ListAction extends AbstractController
         $this->repository = $repository;
     }
 
+    /**
+     * @Route("/", name="user_list")
+     */
     public function __invoke(): Response
     {
         $users = $this->repository->findAll();

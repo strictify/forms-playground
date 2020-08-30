@@ -13,13 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/create", name="movie_create", methods={"GET", "POST"})
- *
  * @Form(class=MovieType::class)
  */
 class CreateAction extends AbstractController
 {
     /**
+     * @Route("/create", name="movie_create", methods={"GET", "POST"})
+     *
      * @param FormInterface<Movie> $form
      */
     public function __invoke(FormInterface $form): Response

@@ -3,6 +3,6 @@ base:
     type: annotation
     prefix: /users
 
-#children:
-#    resource: '../*/_config/routes.yaml'
-#    prefix: /some_prefix
+children:
+    resource: '../*/_config/routes.yaml'
+    prefix: /users

@@ -7,6 +7,7 @@ namespace App\Form\Extension;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
 class DisableClientSideValidation extends AbstractTypeExtension
@@ -15,6 +16,13 @@ class DisableClientSideValidation extends AbstractTypeExtension
     {
         $view->vars['attr']['novalidate'] = true;
         $view->vars['attr']['autocomplete'] = 'off';
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'show_factory_error' => false,
+        ]);
     }
 
     public static function getExtendedTypes(): iterable
