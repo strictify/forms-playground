@@ -27,7 +27,8 @@ class FavoriteMovieRepository extends ServiceEntityRepository
 
     public function removeFor(User $user, Movie $movie): void
     {
-        if ($favMovie = $this->findOneBy(['user' => $user, 'movie' => $movie])) {
+        $favMovie = $this->matchOneBy($this->whereUser($user), $this->whereMovie($movie));
+        if ($favMovie) {
             $this->getEntityManager()->remove($favMovie);
         }
     }
@@ -43,5 +44,10 @@ class FavoriteMovieRepository extends ServiceEntityRepository
     public function whereUser(User $user): Expression
     {
         return $this->expr()->eq('user', $user);
+    }
+
+    public function whereMovie(Movie $movie): Expression
+    {
+        return $this->expr()->eq('movie', $movie);
     }
 }
