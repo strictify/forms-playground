@@ -15,6 +15,7 @@
                     <tr>
                         <th scope="col">First name</th>
                         <th scope="col">Last name</th>
+                        <th scope="col">Favorite movies</th>
                         <th scope="col">Actions</th>
                     </tr>
                     </thead>
@@ -24,7 +25,17 @@
                             <td>{{ user.firstName }}</td>
                             <td>{{ user.lastName }}</td>
                             <td>
-                                <a href="{{ path('user_update_simple', {'id': user.id}) }}">Update</a>
+                                {% for movie in user.favoriteMovies %}
+                                    <a
+                                    href="{{ path('movie_update', {'id': movie.id}) }}">{{ movie.name }}</a>{{ not loop.last ? ', ' }}
+                                {% else %}
+                                    -
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path('user_update_simple', {'id': user.id}) }}">Simple</a>
+                                |
+                                <a href="{{ path('user_update_complex', {'id': user.id}) }}">Complex</a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -14,7 +14,7 @@ class FavoriteMovie
 {
     /**
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favoriteMovieReferences")
      */
     private User $user;
 
@@ -28,6 +28,11 @@ class FavoriteMovie
      * @ORM\Column(type="datetime", nullable=false)
      */
     private DateTime $createdAt;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $comment = null;
 
     public function __construct(User $user, Movie $movie)
     {
@@ -44,5 +49,15 @@ class FavoriteMovie
     public function getMovie(): Movie
     {
         return $this->movie;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): void
+    {
+        $this->comment = $comment;
     }
 }

@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Users\Simple;
+namespace App\Controller\Users\Complex;
 
 use App\Entity\User;
 use App\Annotation\Form;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Controller\Users\Complex\Form\SimpleUserType;
+use App\Controller\Users\Complex\Form\ComplexUserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Form(class=SimpleUserType::class, data="user")
+ * @Form(class=ComplexUserType::class, data="user")
  */
 class UpdateAction extends AbstractController
 {
     /**
-     * @Route("/update/{id}", name="user_update_simple", methods={"GET", "POST"})
+     * @Route("/update/{id}", name="user_update_complex", methods={"GET", "POST"})
      *
      * @param FormInterface<User> $form
      */

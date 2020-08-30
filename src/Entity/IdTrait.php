@@ -18,6 +18,8 @@ trait IdTrait
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class=UuidGenerator::class)
+     *
+     * @psalm-suppress PossiblyUnusedMethod
      */
     protected UuidInterface $id;
 

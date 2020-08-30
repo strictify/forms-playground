@@ -20,6 +20,10 @@ class Movie
      */
     private string $name;
 
+    /**
+     * @internal
+     * @psalm-internal \App\Repository\MovieRepository::create()
+     */
     public function __construct(string $name)
     {
         $this->initId();

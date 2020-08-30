@@ -10,20 +10,36 @@ use Doctrine\Common\Collections\Expr\Expression;
 use Doctrine\Common\Collections\ExpressionBuilder;
 
 /**
- * @template T of object
+ * @template T
+ *
  * @method EntityManager getEntityManager()
+ *
  */
 trait RepositoryUtilsTrait
 {
-//    public function persist(object $entity): void
-//    {
-//        $this->getEntityManager()->persist($entity);
-//    }
-//
-//    public function remove(object $entity): void
-//    {
-//        $this->getEntityManager()->remove($entity);
-//    }
+    /**
+     * @psalm-param T $entity
+     *
+     * @psalm-return T
+     *
+     * @psalm-suppress MixedArgumentTypeCoercion
+     */
+    private function persistEntity($entity)
+    {
+        $this->getEntityManager()->persist($entity);
+
+        return $entity;
+    }
+
+    /**
+     * @psalm-param T $entity
+     *
+     * @psalm-suppress MixedArgumentTypeCoercion
+     */
+    public function removeEntity($entity): void
+    {
+        $this->getEntityManager()->remove($entity);
+    }
 
     public function flush(): void
     {
@@ -32,6 +48,9 @@ trait RepositoryUtilsTrait
 
     /**
      * @psalm-param T $entity
+     *
+     * @psalm-suppress MixedArgumentTypeCoercion
+     * @psalm-suppress PossiblyUnusedMethod
      */
     public function save(object $entity, bool $flush = true): void
     {
@@ -44,6 +63,7 @@ trait RepositoryUtilsTrait
 
     /**
      * @psalm-return array<T>
+     * @psalm-suppress PossiblyUnusedMethod
      */
     public function matchBy(Expression ...$expressions): array
     {
@@ -54,8 +74,9 @@ trait RepositoryUtilsTrait
 
     /**
      * @psalm-return T|null
+     * @psalm-suppress PossiblyUnusedMethod
      */
-    public function matchOneBy(Expression ...$expressions): ?object
+    public function matchOneBy(Expression ...$expressions)
     {
         $criteria = $this->createCriteria(...$expressions);
 

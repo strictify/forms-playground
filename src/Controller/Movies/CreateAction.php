@@ -24,10 +24,8 @@ class CreateAction extends AbstractController
      */
     public function __invoke(FormInterface $form): Response
     {
-        if ($form->isSubmitted() && $form->isValid() && $data = $form->getData()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($data);
-            $em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('movie_list');
         }

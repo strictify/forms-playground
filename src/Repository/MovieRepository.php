@@ -16,8 +16,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class MovieRepository extends ServiceEntityRepository
 {
+    /** @use RepositoryUtilsTrait<Movie> */
+    use RepositoryUtilsTrait;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Movie::class);
+    }
+
+    public function create(string $name): Movie
+    {
+        $movie = new Movie($name);
+        $this->persistEntity($movie);
+
+        return $movie;
+    }
+
+    public function remove(Movie $movie): void
+    {
+        $this->removeEntity($movie);
     }
 }

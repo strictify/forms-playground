@@ -17,6 +17,7 @@
         <file name="stubs/Security/Core/Authentication/Token/TokenInterface/Voter.php"/>
         <file name="stubs/Security/Core/Authentication/Token/TokenInterface/VoterInterface.php"/>
         <file name="stubs/Security/Core/Authentication/Token/TokenInterface/TokenInterface.php"/>
+        <file name="stubs/Doctrine/AbstractFixture.php"/>
         <!--        <file name="stubs/Doctrine/ORM/EntityRepository.php"/>-->
     </stubs>
 
@@ -54,7 +55,7 @@
 
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
-                <!--                <directory name="src/Annotation"/>-->
+                <directory name="src/Annotation"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
 
@@ -80,6 +81,20 @@
             </errorLevel>
         </PossiblyUnusedMethod>
 
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <directory name="src/Repository"/>
+                <directory name="src/Struct"/>
+                <directory name="src/View"/>
+                <!--                <directory name="src/Command"/>-->
+                <!--                <directory name="src/Service"/>-->
+                <!--                <directory name="src/EventSubscriber"/>-->
+                <!--                <directory name="src/Twig"/>-->
+                <!-- Tests have lots of unused public - all the test methods-->
+                <directory name="tests/"/>
+            </errorLevel>
+        </PossiblyUnusedMethod>
+
         <UnusedMethodCall>
             <errorLevel type="suppress">
                 <directory name="src/View"/>
@@ -94,6 +109,9 @@
 
         <UnusedClass>
             <errorLevel type="suppress">
+                <directory name="src/Controller"/>
+                <directory name="src/DataFixtures"/>
+                <directory name="src/Form"/>
                 <!--                <directory name="src/Twig"/>-->
                 <!--                <directory name="src/Annotation"/>-->
                 <!--                <directory name="src/ArgumentValueResolver"/>-->

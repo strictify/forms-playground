@@ -25,8 +25,7 @@ class UpdateAction extends AbstractController
     public function __invoke(FormInterface $form, Movie $movie): Response
     {
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
+            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('movie_list');
         }
