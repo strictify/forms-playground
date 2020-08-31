@@ -25,9 +25,9 @@ class FavoriteMovieRepository extends ServiceEntityRepository
         parent::__construct($registry, FavoriteMovie::class);
     }
 
-    public function create(User $user, Movie $movie): FavoriteMovie
+    public function create(User $user, Movie $movie, ?string $comment = null): FavoriteMovie
     {
-        $favMovie = new FavoriteMovie($user, $movie);
+        $favMovie = new FavoriteMovie($user, $movie, $comment);
         $this->persistEntity($favMovie);
         $user->incNrOfFavoriteMovies();
 
@@ -36,7 +36,7 @@ class FavoriteMovieRepository extends ServiceEntityRepository
 
     public function remove(User $user, Movie $movie): void
     {
-        $favMovie = $this->matchOneBy($this->whereUser($user), $this->whereMovie($movie));
+        $favMovie = $this->getOneResultOrNull($this->whereUser($user), $this->whereMovie($movie));
         if ($favMovie) {
             $this->removeEntity($favMovie);
             $user->decNrOfFavoriteMovies();

@@ -4,21 +4,37 @@ declare(strict_types=1);
 
 namespace App\Struct;
 
-use App\Entity\User;
 use App\Entity\Movie;
 
 class FavoriteMovieFormStruct
 {
-    public bool $isFavorite = false;
-    public ?string $comment = null;
+    private ?string $comment;
 
-    public User $user;
+    private Movie $movie;
 
-    public Movie $movie;
-
-    public function __construct(User $user, Movie $movie)
+    public function __construct(Movie $movie, ?string $comment)
     {
-        $this->user = $user;
+        $this->movie = $movie;
+        $this->comment = $comment;
+    }
+
+    public function getMovie(): Movie
+    {
+        return $this->movie;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): void
+    {
+        $this->comment = $comment;
+    }
+
+    public function setMovie(Movie $movie): void
+    {
         $this->movie = $movie;
     }
 }

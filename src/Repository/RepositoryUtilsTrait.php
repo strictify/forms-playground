@@ -65,7 +65,7 @@ trait RepositoryUtilsTrait
      * @psalm-return array<T>
      * @psalm-suppress PossiblyUnusedMethod
      */
-    public function matchBy(Expression ...$expressions): array
+    public function getResults(Expression ...$expressions): array
     {
         $criteria = $this->createCriteria(...$expressions);
 
@@ -76,7 +76,7 @@ trait RepositoryUtilsTrait
      * @psalm-return T|null
      * @psalm-suppress PossiblyUnusedMethod
      */
-    public function matchOneBy(Expression ...$expressions)
+    public function getOneResultOrNull(Expression ...$expressions)
     {
         $criteria = $this->createCriteria(...$expressions);
 
