@@ -1,0 +1,11 @@
+{% block favorite_movie_row %}
+
+    <div class="row">
+        <div class="col-md-4">{{ form_row(form.movie) }}</div>
+        <div class="col-md-4">{{ form_row(form.comment) }}</div>
+        <div class="col-md-2">
+            <span class="btn btn-danger collection-remove" ><i class="fa fa-minus-circle"></i> </span>
+{#            <a href="#" class="collection-remove btn btn-default" title="Delete fruit"><span class="glyphicon glyphicon-trash"></span></a>#}
+        </div>
+    </div>
+{% endblock %}
