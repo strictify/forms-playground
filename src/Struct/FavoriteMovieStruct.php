@@ -6,7 +6,7 @@ namespace App\Struct;
 
 use App\Entity\Movie;
 
-class FavoriteMovieFormStruct
+class FavoriteMovieStruct
 {
     private ?string $comment;
 

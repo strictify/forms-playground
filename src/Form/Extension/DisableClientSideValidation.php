@@ -21,7 +21,8 @@ class DisableClientSideValidation extends AbstractTypeExtension
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-//            'show_factory_error' => false,
+            'show_factory_error' => false,
+            'required' => false,
         ]);
     }
 

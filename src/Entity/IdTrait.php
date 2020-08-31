@@ -25,7 +25,7 @@ trait IdTrait
 
     private function initId(): void
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Uuid::uuid1();
     }
 
     public function getId(): UuidInterface
