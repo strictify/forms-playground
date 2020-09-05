@@ -7,10 +7,12 @@ namespace App\Controller\Users\Complex\Form;
 use App\Entity\User;
 use App\Entity\Movie;
 use App\Form\BasicUserType;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\AbstractType;
 use App\Repository\FavoriteMovieRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Event\PreSetDataEvent;
 
 /**
  * @extends AbstractType<User>
@@ -36,6 +38,12 @@ class SimpleUserType extends AbstractType
             'add_value'    => fn(Movie $movie, User $user) => $this->repository->create($user, $movie),
             'remove_value' => fn(Movie $movie, User $user) => $this->repository->remove($user, $movie),
         ]);
+
+        /** @psalm-suppress UnusedVariable */
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (PreSetDataEvent $event) {
+            $user = $event->getData();
+            /** @psalm-trace $user */
+        });
     }
 
     public function getParent(): string

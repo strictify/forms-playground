@@ -56,7 +56,7 @@
         "symfony/twig-bundle": "^5.1",
         "symfony/var-dumper": "^5.1",
         "symfony/web-profiler-bundle": "^5.1",
-        "vimeo/psalm": "^3.14",
+        "vimeo/psalm": "3.14",
         "psalm/plugin-symfony": "dev-symfony-forms",
         "doctrine/doctrine-fixtures-bundle": "^3.3"
     },
