@@ -16,8 +16,6 @@ use Symfony\Component\Form\Event\PreSetDataEvent;
 
 /**
  * @extends AbstractType<User>
- *
- * @see User
  */
 class SimpleUserType extends AbstractType
 {
@@ -50,5 +48,4 @@ class SimpleUserType extends AbstractType
     {
         return BasicUserType::class;
     }
-
 }

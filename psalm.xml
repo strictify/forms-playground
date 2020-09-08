@@ -18,6 +18,23 @@
         <file name="stubs/Security/Core/Authentication/Token/TokenInterface/VoterInterface.php"/>
         <file name="stubs/Security/Core/Authentication/Token/TokenInterface/TokenInterface.php"/>
         <file name="stubs/Doctrine/AbstractFixture.php"/>
+
+        <file name="stubs/Forms/AbstractType.stubphp"/>
+        <file name="stubs/Forms/AbstractTypeExtension.stubphp"/>
+        <file name="stubs/Forms/DataTransformerInterface.stubphp"/>
+        <file name="stubs/Forms/FormBuilderInterface.stubphp"/>
+        <file name="stubs/Forms/FormConfigBuilderInterface.stubphp"/>
+        <file name="stubs/Forms/FormConfigInterface.stubphp"/>
+        <file name="stubs/Forms/FormEvent.stubphp"/>
+        <file name="stubs/Forms/FormFactoryInterface.stubphp"/>
+        <file name="stubs/Forms/FormInterface.stubphp"/>
+        <file name="stubs/Forms/FormTypeExtensionInterface.stubphp"/>
+        <file name="stubs/Forms/FormTypeInterface.stubphp"/>
+        <file name="stubs/Forms/FormView.stubphp"/>
+        <file name="stubs/Forms/PostSetDataEvent.stubphp"/>
+        <file name="stubs/Forms/PreSetDataEvent.stubphp"/>
+        <file name="stubs/Forms/PreSubmitEvent.stubphp"/>
+        <file name="stubs/Forms/SubmitEvent.stubphp"/>
         <!--        <file name="stubs/Doctrine/ORM/EntityRepository.php"/>-->
     </stubs>
 
@@ -55,7 +72,7 @@
 
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
-                <directory name="src/Annotation"/>
+                <directory name="src/"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
 
@@ -127,10 +144,10 @@
 
     </issueHandlers>
 
-    <plugins>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">
-            <containerXml>var/cache/dev/App_KernelDevDebugContainer.xml</containerXml>
-        </pluginClass>
+<!--    <plugins>-->
+<!--        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin">-->
+<!--            <containerXml>var/cache/dev/App_KernelDevDebugContainer.xml</containerXml>-->
+<!--        </pluginClass>-->
 
-    </plugins>
+<!--    </plugins>-->
 </psalm>

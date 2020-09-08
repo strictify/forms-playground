@@ -10,6 +10,7 @@ use App\Struct\FavoriteMovieStruct;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -31,6 +32,9 @@ class FavoriteMovieType extends AbstractType
             'choice_label' => fn(Movie $movie) => $movie->getName(),
             'get_value'    => /** @psalm-param S $favoriteMovie */ fn(object $favoriteMovie) => $favoriteMovie->getMovie(),
             'update_value' => /** @psalm-param S $favoriteMovie */ fn(Movie $movie, object $favoriteMovie) => $favoriteMovie->setMovie($movie),
+            'constraints'  => [
+                new NotNull(['message' => 'You have to select a movie']),
+            ],
         ]);
 
         $builder->add('comment', TextType::class, [

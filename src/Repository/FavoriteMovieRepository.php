@@ -45,7 +45,7 @@ class FavoriteMovieRepository extends ServiceEntityRepository
 
     public function whereUser(User $user): Expression
     {
-        return $this->expr()->eq('user', $user);
+        return $this->expr()->eq('user', $user->getId());
     }
 
     public function whereMovie(Movie $movie): Expression
