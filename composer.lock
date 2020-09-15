@@ -8007,12 +8007,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "99364192634dc024c0846ea7068ff78149924895"
+                "reference": "dda013dc2e43f9a6a7bc324ed21bbba6b3a2ec99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/99364192634dc024c0846ea7068ff78149924895",
-                "reference": "99364192634dc024c0846ea7068ff78149924895",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/dda013dc2e43f9a6a7bc324ed21bbba6b3a2ec99",
+                "reference": "dda013dc2e43f9a6a7bc324ed21bbba6b3a2ec99",
                 "shasum": ""
             },
             "require": {
@@ -8025,6 +8025,7 @@
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-libxml": "*",
+                "ext-mbstring": "*",
                 "ext-simplexml": "*",
                 "ext-tokenizer": "*",
                 "felixfbecker/advanced-json-rpc": "^3.0.3",
@@ -8099,7 +8100,7 @@
                 "inspection",
                 "php"
             ],
-            "time": "2020-09-08T13:11:47+00:00"
+            "time": "2020-09-15T13:40:27+00:00"
         },
         {
             "name": "webmozart/glob",
