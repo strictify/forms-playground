@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
+use App\Repository\FavoriteMovieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use function array_map_i;
 
@@ -89,6 +90,8 @@ class User
     /**
      * @internal
      * @psalm-internal App\Repository
+     *
+     * @see FavoriteMovieRepository::create()
      */
     public function incNrOfFavoriteMovies(): void
     {
@@ -98,6 +101,8 @@ class User
     /**
      * @internal
      * @psalm-internal App\Repository
+     *
+     * @see FavoriteMovieRepository::remove()
      */
     public function decNrOfFavoriteMovies(): void
     {

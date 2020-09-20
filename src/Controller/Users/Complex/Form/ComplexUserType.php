@@ -48,7 +48,7 @@ class ComplexUserType extends AbstractType
             'allow_delete' => true,
             'get_value'    => fn(User $user) => $repo->getResults($repo->whereUser($user)),
             'add_value'    => fn(FavoriteMovieStruct $struct, User $user) => $repo->create($user, $struct->getMovie(), $struct->getComment()),
-            'remove_value' => fn(FavoriteMovie $data) => $this->favoriteMovieRepository->removeEntity($data),
+            'remove_value' => fn(FavoriteMovie $data) => $repo->removeEntity($data),
             'constraints'  => [
                 new Count(['min' => 1]),
                 new Callback(['callback' => [$this, 'assertUniqueMovies']]),
