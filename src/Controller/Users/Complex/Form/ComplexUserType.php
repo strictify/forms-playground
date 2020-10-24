@@ -45,10 +45,11 @@ class ComplexUserType extends AbstractType
         $builder->add('movies', CollectionType::class, [
             'entry_type'   => FavoriteMovieType::class,
             'allow_add'    => true,
+//            'delete_empty' => true,
             'allow_delete' => true,
+            'add_value' => fn(FavoriteMovie $struct, User $data) => $repo->create($data, $struct->getMovie(), $struct->getComment()),
             'get_value'    => fn(User $user) => $repo->getResults($repo->whereUser($user)),
-            'add_value'    => fn(FavoriteMovieStruct $struct, User $user) => $repo->create($user, $struct->getMovie(), $struct->getComment()),
-            'remove_value' => fn(FavoriteMovie $data) => $repo->removeEntity($data),
+            'remove_value' => fn(FavoriteMovie $favoriteMovie) => $repo->removeEntity($favoriteMovie),
             'constraints'  => [
                 new Count(['min' => 1]),
                 new Callback(['callback' => [$this, 'assertUniqueMovies']]),
@@ -59,7 +60,7 @@ class ComplexUserType extends AbstractType
     /**
      * Each movie can be added only once.
      *
-     * @psalm-param array<S|null> $movies
+     * @psalm-param array<FavoriteMovie|null> $movies
      */
     public function assertUniqueMovies(array $movies, ExecutionContextInterface $executionContext): void
     {

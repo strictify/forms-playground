@@ -7,6 +7,7 @@ namespace App\Controller\Users\Complex\Form;
 use App\Entity\Movie;
 use App\Entity\FavoriteMovie;
 use App\Struct\FavoriteMovieStruct;
+use Doctrine\Instantiator\Instantiator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -30,20 +31,20 @@ class FavoriteMovieType extends AbstractType
             'placeholder'  => '-- Select movie --',
             'label'        => false,
             'choice_label' => fn(Movie $movie) => $movie->getName(),
-            'get_value'    => /** @psalm-param S $favoriteMovie */ fn(object $favoriteMovie) => $favoriteMovie->getMovie(),
-            'update_value' => /** @psalm-param S $favoriteMovie */ fn(Movie $movie, object $favoriteMovie) => $favoriteMovie->setMovie($movie),
+            'get_value'    => fn(FavoriteMovie $struct) => $struct->getMovie(),
+            'update_value' => fn(Movie $movie, FavoriteMovie $struct) => $struct->setMovie($movie),
             'constraints'  => [
-                new NotNull(['message' => 'You have to select a movie']),
+                new NotNull(),
             ],
         ]);
 
         $builder->add('comment', TextType::class, [
-            'label'        => false,
-            'attr'         => [
+            'label'     => false,
+            'attr'      => [
                 'placeholder' => '-- Comment --',
             ],
-            'get_value'    => /** @psalm-param S $favoriteMovie */ fn(object $favoriteMovie) => $favoriteMovie->getComment(),
-            'update_value' => /** @psalm-param S $favoriteMovie */ fn(string $comment, object $favoriteMovie) => $favoriteMovie->setComment($comment),
+            'get_value' => fn(FavoriteMovie $struct) => $struct->getComment(),
+            'update_value' => fn(string $comment, FavoriteMovie $struct) => $struct->setComment($comment),
         ]);
     }
 
@@ -51,7 +52,14 @@ class FavoriteMovieType extends AbstractType
     {
         $resolver->setDefaults([
             'label'   => false,
-            'factory' => fn(Movie $movie, ?string $comment) => new FavoriteMovieStruct($movie, $comment),
+            'factory' => function (Movie $movie, string $comment) {
+                /** @var FavoriteMovie $struct */
+                $struct = (new Instantiator())->instantiate(FavoriteMovie::class);
+                $struct->setMovie($movie);
+                $struct->setComment($comment);
+
+                return $struct;
+            },
         ]);
     }
 
