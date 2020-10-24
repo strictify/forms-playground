@@ -28,14 +28,13 @@ class SimpleUserType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        return;
         $builder->add('favoriteMovies', EntityType::class, [
             'class'        => Movie::class,
             'choice_label' => fn(Movie $movie) => $movie->getName(),
             'multiple'     => true,
             'get_value'    => fn(User $user) => $user->getFavoriteMovies(),
-//            'add_value'    => fn(Movie $movie, User $data) => $this->repository->create($data, $movie),
-//            'remove_value' => fn(Movie $movie, User $data) => $this->repository->remove($data, $movie),
+            'add_value'    => fn(Movie $movie, User $data) => $this->repository->create($data, $movie),
+            'remove_value' => fn(Movie $movie, User $data) => $this->repository->remove($data, $movie),
         ]);
 
         /** @psalm-suppress UnusedVariable */

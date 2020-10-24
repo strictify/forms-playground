@@ -52,14 +52,14 @@ function find_first(iterable $items, Closure $closure) {
  * @template T
  * @template R
  *
- * @psalm-param iterable<mixed, T> $iterable
- * @psalm-param Closure(T, mixed):R $callback
+ * @psalm-param iterable<array-key, T> $input
+ * @psalm-param Closure(T, array-key):R $callback
  *
  * @psalm-return list<R>
  */
-function array_map_i(iterable $iterable, Closure $callback): array {
+function array_map_i(iterable $input, Closure $callback): array {
     $results = [];
-    foreach ($iterable as $key => $item) {
+    foreach ($input as $key => $item) {
         $results[] = $callback($item, $key);
     }
 
@@ -69,8 +69,8 @@ function array_map_i(iterable $iterable, Closure $callback): array {
 /**
  * @template T
  *
- * @psalm-param iterable<T> $iterable
- * @psalm-param Closure(mixed, T):void $callback
+ * @psalm-param iterable<array-key, T> $iterable
+ * @psalm-param Closure(array-key, T):void $callback
  */
 function foreach_do(iterable $iterable, Closure $callback): void {
     foreach ($iterable as $key => $value) {

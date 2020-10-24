@@ -39,6 +39,7 @@ class BasicUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+//            'data_class' => User::class,
             'factory' => fn(string $firstName, string $lastName) => $this->userRepository->create($firstName, $lastName),
         ]);
     }

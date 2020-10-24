@@ -11,7 +11,6 @@ use Doctrine\Instantiator\Instantiator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -33,9 +32,6 @@ class FavoriteMovieType extends AbstractType
             'choice_label' => fn(Movie $movie) => $movie->getName(),
             'get_value'    => fn(FavoriteMovie $struct) => $struct->getMovie(),
             'update_value' => fn(Movie $movie, FavoriteMovie $struct) => $struct->setMovie($movie),
-            'constraints'  => [
-                new NotNull(),
-            ],
         ]);
 
         $builder->add('comment', TextType::class, [
@@ -52,14 +48,7 @@ class FavoriteMovieType extends AbstractType
     {
         $resolver->setDefaults([
             'label'   => false,
-            'factory' => function (Movie $movie, string $comment) {
-                /** @var FavoriteMovie $struct */
-                $struct = (new Instantiator())->instantiate(FavoriteMovie::class);
-                $struct->setMovie($movie);
-                $struct->setComment($comment);
-
-                return $struct;
-            },
+            'factory' => fn(Movie $movie, string $comment) => (new Instantiator())->instantiate(FavoriteMovie::class),
         ]);
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Users\Complex\Form;
 
 use App\Entity\User;
+use App\Entity\Movie;
 use App\Form\BasicUserType;
 use App\Entity\FavoriteMovie;
 use App\Struct\FavoriteMovieStruct;
@@ -15,9 +16,9 @@ use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use function array_map_i;
-use function array_unique;
 use function count;
+use function array_map;
+use function array_unique;
 use function array_filter;
 
 /**
@@ -26,8 +27,6 @@ use function array_filter;
  * @see User
  * @see FavoriteMovie
  * @see FavoriteMovieStruct
- *
- * @psalm-type S=FavoriteMovie|FavoriteMovieStruct
  */
 class ComplexUserType extends AbstractType
 {
@@ -47,7 +46,7 @@ class ComplexUserType extends AbstractType
             'allow_add'    => true,
 //            'delete_empty' => true,
             'allow_delete' => true,
-            'add_value' => fn(FavoriteMovie $struct, User $data) => $repo->create($data, $struct->getMovie(), $struct->getComment()),
+            'add_value' => fn(FavoriteMovie $struct, User $user) => $repo->create($user, $struct->getMovie(), $struct->getComment()),
             'get_value'    => fn(User $user) => $repo->getResults($repo->whereUser($user)),
             'remove_value' => fn(FavoriteMovie $favoriteMovie) => $repo->removeEntity($favoriteMovie),
             'constraints'  => [
@@ -61,11 +60,14 @@ class ComplexUserType extends AbstractType
      * Each movie can be added only once.
      *
      * @psalm-param array<FavoriteMovie|null> $movies
+     *
+     * @see Movie must be unique
      */
     public function assertUniqueMovies(array $movies, ExecutionContextInterface $executionContext): void
     {
         $movies = array_filter($movies, fn($movie) => $movie !== null);
-        $ids = array_map_i($movies, /** @psalm-param S $ref */ fn($ref) => (string)$ref->getMovie()->getId());
+        $ids = array_map(fn(FavoriteMovie $reference) => (string)$reference->getMovie()->getId(), $movies);
+        
         if (count($ids) !== count(array_unique($ids))) {
             $executionContext->addViolation('You have duplicate movies.');
         }
