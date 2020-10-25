@@ -2424,12 +2424,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/strictify/form-mapper-bundle.git",
-                "reference": "beaeadf400f6fde2238574c0d9b251e6a73a5a86"
+                "reference": "eb0ac0bc5725c6c529c02e135505b640525f9a44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/strictify/form-mapper-bundle/zipball/beaeadf400f6fde2238574c0d9b251e6a73a5a86",
-                "reference": "beaeadf400f6fde2238574c0d9b251e6a73a5a86",
+                "url": "https://api.github.com/repos/strictify/form-mapper-bundle/zipball/eb0ac0bc5725c6c529c02e135505b640525f9a44",
+                "reference": "eb0ac0bc5725c6c529c02e135505b640525f9a44",
                 "shasum": ""
             },
             "require": {
@@ -2497,7 +2497,7 @@
                 "source": "https://github.com/strictify/form-mapper-bundle/tree/master",
                 "issues": "https://github.com/strictify/form-mapper-bundle/issues"
             },
-            "time": "2020-10-25T15:58:39+00:00"
+            "time": "2020-10-25T22:05:31+00:00"
         },
         {
             "name": "symfony/asset",

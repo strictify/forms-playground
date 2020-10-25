@@ -56,7 +56,7 @@ class FavoriteMovieType extends AbstractType
     {
         $resolver->setDefaults([
             'label'   => false,
-            'factory' => fn(Movie $movie, string $comment, User $caller) => $this->favoriteMovieRepository->create($caller, $movie, $comment),
+            'factory' => fn(Movie $movie, string $comment, User $parent) => $this->favoriteMovieRepository->create($parent, $movie, $comment),
             'remove_entry' => fn(FavoriteMovie $favoriteMovie) => $this->favoriteMovieRepository->removeEntity($favoriteMovie),
         ]);
     }
