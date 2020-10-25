@@ -45,9 +45,7 @@ class ComplexUserType extends AbstractType
             'entry_type'    => FavoriteMovieType::class,
             'allow_add'     => true,
             'allow_delete'  => true,
-            'get_value'     => function (User $user) use ($repo) {
-                return $repo->getResults($repo->whereUser($user));
-            },
+            'get_value'     => fn(User $user) => $repo->getResults($repo->whereUser($user)),
             'constraints'   => [
                 new Count(['min' => 1]),
                 new Callback(['callback' => [$this, 'assertUniqueMovies']]),

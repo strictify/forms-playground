@@ -38,9 +38,7 @@ class FavoriteMovieType extends AbstractType
             'placeholder'  => '-- Select movie --',
             'label'        => false,
             'choice_label' => fn(Movie $movie) => $movie->getName(),
-            'get_value'    => function (FavoriteMovie $struct) {
-                return $struct->getMovie();
-            },
+            'get_value'    => fn(FavoriteMovie $struct) => $struct->getMovie(),
             'update_value' => fn(Movie $movie, FavoriteMovie $struct) => $struct->setMovie($movie),
         ]);
 
