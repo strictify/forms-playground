@@ -14,13 +14,13 @@ class FavoriteMovie
 {
     use IdTrait;
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favoriteMovieReferences")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favoriteMovieReferences", fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private User $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Movie::class)
+     * @ORM\ManyToOne(targetEntity=Movie::class, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private Movie $movie;
@@ -42,6 +42,11 @@ class FavoriteMovie
         $this->movie = $movie;
         $this->createdAt = new DateTime();
         $this->comment = $comment;
+    }
+
+    public function __toString()
+    {
+        return $this->movie->getName();
     }
 
     public function getCreatedAt(): DateTime

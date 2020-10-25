@@ -72,6 +72,11 @@ class User
         $this->lastName = $lastName;
     }
 
+    public function getFavoriteMovieReferences(): array
+    {
+        return $this->favoriteMovieReferences->toArray();
+    }
+
     /**
      * @return array<Movie>
      */

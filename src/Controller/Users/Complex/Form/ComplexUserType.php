@@ -42,14 +42,13 @@ class ComplexUserType extends AbstractType
         $repo = $this->favoriteMovieRepository;
 
         $builder->add('movies', CollectionType::class, [
-            'entry_type'   => FavoriteMovieType::class,
-            'allow_add'    => true,
-//            'delete_empty' => true,
-            'allow_delete' => true,
-            'add_value' => fn(FavoriteMovie $struct, User $user) => $repo->create($user, $struct->getMovie(), $struct->getComment()),
-            'get_value'    => fn(User $user) => $repo->getResults($repo->whereUser($user)),
-            'remove_value' => fn(FavoriteMovie $favoriteMovie) => $repo->removeEntity($favoriteMovie),
-            'constraints'  => [
+            'entry_type'    => FavoriteMovieType::class,
+            'allow_add'     => true,
+            'allow_delete'  => true,
+            'get_value'     => function (User $user) use ($repo) {
+                return $repo->getResults($repo->whereUser($user));
+            },
+            'constraints'   => [
                 new Count(['min' => 1]),
                 new Callback(['callback' => [$this, 'assertUniqueMovies']]),
             ],
@@ -67,7 +66,7 @@ class ComplexUserType extends AbstractType
     {
         $movies = array_filter($movies, fn($movie) => $movie !== null);
         $ids = array_map(fn(FavoriteMovie $reference) => (string)$reference->getMovie()->getId(), $movies);
-        
+
         if (count($ids) !== count(array_unique($ids))) {
             $executionContext->addViolation('You have duplicate movies.');
         }

@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller\Users\Complex\Form;
 
+use App\Entity\User;
 use App\Entity\Movie;
 use App\Entity\FavoriteMovie;
 use App\Struct\FavoriteMovieStruct;
-use Doctrine\Instantiator\Instantiator;
 use Symfony\Component\Form\AbstractType;
+use App\Repository\FavoriteMovieRepository;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,6 +24,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class FavoriteMovieType extends AbstractType
 {
+    private FavoriteMovieRepository $favoriteMovieRepository;
+
+    public function __construct(FavoriteMovieRepository $favoriteMovieRepository)
+    {
+        $this->favoriteMovieRepository = $favoriteMovieRepository;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('movie', EntityType::class, [
@@ -30,7 +38,9 @@ class FavoriteMovieType extends AbstractType
             'placeholder'  => '-- Select movie --',
             'label'        => false,
             'choice_label' => fn(Movie $movie) => $movie->getName(),
-            'get_value'    => fn(FavoriteMovie $struct) => $struct->getMovie(),
+            'get_value'    => function (FavoriteMovie $struct) {
+                return $struct->getMovie();
+            },
             'update_value' => fn(Movie $movie, FavoriteMovie $struct) => $struct->setMovie($movie),
         ]);
 
@@ -48,7 +58,8 @@ class FavoriteMovieType extends AbstractType
     {
         $resolver->setDefaults([
             'label'   => false,
-            'factory' => fn(Movie $movie, string $comment) => (new Instantiator())->instantiate(FavoriteMovie::class),
+            'factory' => fn(Movie $movie, string $comment, User $caller) => $this->favoriteMovieRepository->create($caller, $movie, $comment),
+            'remove_entry' => fn(FavoriteMovie $favoriteMovie) => $this->favoriteMovieRepository->removeEntity($favoriteMovie),
         ]);
     }
 
