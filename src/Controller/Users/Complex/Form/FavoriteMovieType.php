@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  * @see FavoriteMovieStruct
  *
  * @psalm-type S=FavoriteMovie|FavoriteMovieStruct
+ * @extends AbstractType<array{movie: Movie, comment: string}>
  */
 class FavoriteMovieType extends AbstractType
 {
@@ -34,17 +35,17 @@ class FavoriteMovieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('movie', EntityType::class, [
-            'class'        => Movie::class,
-            'placeholder'  => '-- Select movie --',
-            'label'        => false,
+            'class' => Movie::class,
+            'placeholder' => '-- Select movie --',
+            'label' => false,
             'choice_label' => fn(Movie $movie) => $movie->getName(),
-            'get_value'    => fn(FavoriteMovie $struct) => $struct->getMovie(),
+            'get_value' => fn(FavoriteMovie $struct) => $struct->getMovie(),
             'update_value' => fn(Movie $movie, FavoriteMovie $struct) => $struct->setMovie($movie),
         ]);
 
         $builder->add('comment', TextType::class, [
-            'label'     => false,
-            'attr'      => [
+            'label' => false,
+            'attr' => [
                 'placeholder' => '-- Comment --',
             ],
             'get_value' => fn(FavoriteMovie $struct) => $struct->getComment(),
@@ -55,7 +56,7 @@ class FavoriteMovieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'label'   => false,
+            'label' => false,
             'factory' => fn(Movie $movie, string $comment, User $parent) => $this->favoriteMovieRepository->create($parent, $movie, $comment),
             'remove_entry' => fn(FavoriteMovie $favoriteMovie) => $this->favoriteMovieRepository->removeEntity($favoriteMovie),
         ]);

@@ -46,8 +46,8 @@ class SimpleUserType extends AbstractType
             'remove_value' => fn(Movie $movie, User $data) => $this->repository->remove($data, $movie),
         ]);
 
-        /** @psalm-suppress UnusedVariable */
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (PreSetDataEvent $event) {
+            /** @psalm-suppress UnusedVariable */
             $user = $event->getData();
             /** @psalm-trace $user */
         });

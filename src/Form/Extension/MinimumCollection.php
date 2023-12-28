@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 /**
+ * @extends AbstractTypeExtension<void>
  * @see app.js
  *
  * If Collection has Count constraint with min > 0, add it as an attribute.

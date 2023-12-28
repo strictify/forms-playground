@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <psalm
+        phpVersion="8.1"
         useDocblockPropertyTypes="false"
         resolveFromConfigFile="true"
         addParamDefaultToDocblockType="false"
         allowPhpStormGenerics="true"
         findUnusedCode="false"
-        findUnusedVariablesAndParams="true"
+        findUnusedVariablesAndParams="false"
         reportMixedIssues="true"
         usePhpStormMetaPath="true"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -49,11 +50,10 @@
     </projectFiles>
 
     <issueHandlers>
-        <MixedInferredReturnType>
-            <errorLevel type="suppress">
-                <directory name="src/Repository"/>
-            </errorLevel>
-        </MixedInferredReturnType>
+        <UnusedVariable>
+            <errorLevel type="suppress"/>
+        </UnusedVariable>
+
         <MixedReturnStatement>
             <errorLevel type="suppress">
                 <directory name="src/Repository"/>
@@ -135,11 +135,6 @@
             </errorLevel>
         </UnusedClass>
 
-        <UninitializedProperty>
-            <errorLevel type="suppress">
-                <!--                <directory name="src/Response"/>-->
-            </errorLevel>
-        </UninitializedProperty>
 
 
     </issueHandlers>

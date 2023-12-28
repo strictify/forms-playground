@@ -10,6 +10,9 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 
+/**
+ * @extends AbstractTypeExtension<void>
+ */
 class DisableClientSideValidation extends AbstractTypeExtension
 {
     public function buildView(FormView $view, FormInterface $form, array $options): void

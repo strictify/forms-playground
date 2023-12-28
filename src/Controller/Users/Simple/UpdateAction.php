@@ -6,6 +6,7 @@ namespace App\Controller\Users\Simple;
 
 use App\Entity\User;
 use App\Annotation\Form;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,10 +23,10 @@ class UpdateAction extends AbstractController
      *
      * @param FormInterface<User> $form
      */
-    public function __invoke(FormInterface $form, User $user): Response
+    public function __invoke(FormInterface $form, User $user, EntityManagerInterface $em): Response
     {
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('user_list');
         }

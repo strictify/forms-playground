@@ -7,6 +7,7 @@ namespace App\Controller\Movies;
 use App\Entity\Movie;
 use App\Form\MovieType;
 use App\Annotation\Form;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,10 +23,10 @@ class CreateAction extends AbstractController
      *
      * @param FormInterface<Movie> $form
      */
-    public function __invoke(FormInterface $form): Response
+    public function __invoke(FormInterface $form, EntityManagerInterface $em): Response
     {
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->flush();
 
             return $this->redirectToRoute('movie_list');
         }
