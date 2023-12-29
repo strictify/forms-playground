@@ -26,6 +26,10 @@ class MinimumCollection extends AbstractTypeExtension
         yield CollectionType::class;
     }
 
+    /**
+     * @psalm-suppress MixedArrayAssignment
+     * @psalm-suppress MixedPropertyTypeCoercion
+     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         /** @var array<Constraint> $constraints */

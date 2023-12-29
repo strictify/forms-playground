@@ -21,16 +21,12 @@ use function array_map;
  */
 class SimpleUserType extends AbstractType
 {
-    private FavoriteMovieRepository $repository;
-
-    public function __construct(FavoriteMovieRepository $favoriteMovieRepository)
+    public function __construct(private FavoriteMovieRepository $repository)
     {
-        $this->repository = $favoriteMovieRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $repo = $this->repository;
 
         $builder->add('favoriteMovies', EntityType::class, [
             'class'        => Movie::class,

@@ -15,6 +15,10 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
  */
 class DisableClientSideValidation extends AbstractTypeExtension
 {
+    /**
+     * @psalm-suppress MixedArrayAssignment
+     * @psalm-suppress MixedPropertyTypeCoercion
+     */
     public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         $view->vars['attr']['novalidate'] = true;
